@@ -3,8 +3,8 @@ const https = require('https');
 
 const fetchApiKey = () => {
   try {
-      let apiString = fs.readFileSync('./openweather.key.txt');
-      return apiString.toString();
+      let apiAccessKeyString = fs.readFileSync('./openweather.key.txt');
+      return apiAccessKeyString.toString();
   } catch (e) {
       return [];
   }
@@ -15,7 +15,7 @@ const bangkokForecast = async () => {
   const apiForcastKey = fetchApiKey();
   let sevenDayWeatherForecastList = [];
 
-  https.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=Bangkok,THA&cnt=7&appid=${apiForcastKey}`, (resp) => {
+  https.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=Bangkok,THA&units=metric&cnt=7&appid=${apiForcastKey}`, (resp) => {
     let data = '';
 
     // A chunk of data has been recieved.
