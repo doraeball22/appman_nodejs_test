@@ -51,8 +51,8 @@ const dataUsage = () => {
 
 
   // Display results
-  results.forEach(userUsage => {
-    console.log(userUsage)
+  results.forEach(userDataUsage => {
+    console.log(userDataUsage)
   })
 
 };
