@@ -13,6 +13,7 @@ const fetchApiKey = () => {
 const bangkokForecast = async () => {
   // put your code here !!
   const apiForcastKey = fetchApiKey();
+  let sevenDayWeatherForecastList = [];
 
   https.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=Bangkok,THA&cnt=7&appid=${apiForcastKey}`, (resp) => {
     let data = '';
@@ -25,10 +26,17 @@ const bangkokForecast = async () => {
     // The whole response has been received. Print out the result.
     resp.on('end', () => {
       let weatherData = JSON.parse(data);
-      console.log(weatherData);
-      // weatherData.list.forEach(weather => {
-      //   console.log(weather)
-      // })
+      // console.log(weatherData);
+      weatherData.list.forEach(weather => {
+        // console.log(weather)
+        sevenDayWeatherForecastList.push({
+          date: Date(weather.dt),
+          minTemp: weather.temp.min,
+          maxTemp: weather.temp.max
+        })
+      });
+
+      console.log(sevenDayWeatherForecastList);
     });
 
   }).on("error", (err) => {
